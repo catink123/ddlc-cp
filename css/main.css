@@ -1,0 +1,420 @@
+@font-face {
+    font-family: 'Ubuntu', 'Overpass';
+    src: url(../fonts/Overpass-Regular.ttf) format("truetype");
+}
+
+body {
+    background-color: #111111;
+    overflow: hidden;
+    font-family: 'Ubuntu', 'Overpass';
+}
+
+* {
+    user-select: none;
+    outline: none;
+}
+
+.resultdiv {
+    display: flex;
+    z-index: 1;
+    flex-grow: 1;
+    margin: 0 5px;
+}
+
+.resultdiv div {
+    display: flex;
+    flex-direction:column;
+}
+
+.chrresult, .bgresult {
+    background-color: transparent;
+    font-family: 'Ubuntu', 'Overpass';
+    font-size: 0.8em;
+    font-weight: bold;
+    border: solid 2px white;
+    color: white;
+    transition-duration: .15s;
+    padding: 1.4px;
+    border-right-width: 1px;
+}
+
+.chrresult:hover, .bgresult:hover {
+    background-color: white;
+    color: black;
+}
+
+.chrresult:active, .bgresult:active {
+    background-color: #999;
+    border-color: #999;
+}
+
+.chrresult {
+    border-radius: 5px 0 0 0;
+    border-bottom-width: 1px;
+}
+
+.bgresult {
+    border-radius: 0 0 0 5px;
+    border-top-width: 1px;
+}
+
+#resulttext {
+    padding: 5px;
+    font-family: 'Ubuntu', 'Overpass';
+    font-weight: bold;
+    font-size: 1.2em;
+    border-radius: 0 5px 5px 0;
+    border: 2px solid #FFFFFF;
+    border-left-width: 0.5px;
+    background-color: transparent;
+    color: white;
+    transition-duration: .15s;
+    width: 100%;
+    bottom: 8px;
+/*     position: fixed; */
+}
+
+#resulttext:focus {
+    background: white;
+    color: black;
+}
+
+select {
+    padding: 5px;
+    font-family: 'Ubuntu', 'Overpass';
+    font-weight: bold;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: 2px solid #FFFFFF;
+    background-color: white;
+    color: black;
+    transition-duration: .15s;
+    width: 100%;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+}
+
+select:active {
+    transform: scale(0.9);
+}
+
+.preview {
+    height: calc(100vh - 98px);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.previews {
+    height: calc(100vh - 100px);
+}
+
+.position {
+    margin: 1em 0;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.position button {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: transparent;
+    font-family: 'Ubuntu', 'Overpass';
+    font-size: 1.1em;
+    font-weight: bold;
+    color: black;
+    transition-duration: .15s;
+    margin: 0 calc(100vw - 95vw);
+}
+
+.position button:hover {
+    border: 2px solid black;
+    background-color: black;
+    color: white;
+}
+
+.position button:active {
+    border: 2px solid #444;
+    background-color: black;
+    color: white;
+    transform: scale(0.9);
+}
+
+#positionmenu {
+    flex-direction: column;
+    overflow: hidden !important;
+}
+
+#positionmenu p {
+    margin: 5px 0px;
+    width: 100vw;
+    text-align: center;
+    font-weight: bold;
+}
+
+.posattr {
+    width: 100%;
+    display: flex;
+}
+
+.posattr div {
+    width: 50%;
+}
+
+.posattr button {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: transparent;
+    font-family: 'Ubuntu', 'Overpass';
+    font-size: 1.1em;
+    font-weight: bold;
+    color: black;
+    transition-duration: .15s;
+    width: calc(100% - 10px);
+    margin: 5px;
+    margin-bottom: 0;
+}
+
+.posattr button:hover {
+    border: 2px solid black;
+    background-color: black;
+    color: white;
+}
+
+.posattr button:active {
+    border: 2px solid #444;
+    background-color: black;
+    color: white;
+    transform: scale(0.9);
+}
+
+.menu {
+    background-color: #FFFFFFAA;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 10;
+}
+
+.menuitem {
+    width: 200px;
+    height: 200px;
+    border: black solid 2px;
+    background-color: #000000AA;
+    border-radius: 5px 5px 0px 0px;
+    margin: 2px;
+    transition-duration: .15s;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.menuitem:active {
+    transform: scale(0.9);
+}
+
+.menuitem p {
+    position: relative;
+    top: 183px;
+    left: -2px;
+    background-color: #FFFFFFAA;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    width: 100%;
+    border-radius: 0px 0px 5px 5px;
+    border: 2px white solid;
+}
+
+.headmenuitem {
+    background-color: transparent !important;
+}
+
+.headmenuitem::after {
+    width: 200px;
+    height: 200px;
+    background-color: #000000AA;
+    z-index: -2;
+    content: '';
+    position: absolute;
+}
+
+.headmenuitem img {
+    width: 200px;
+    position: absolute;
+    z-index: -1;
+    object-fit: none;
+}
+
+.outfitmenuitem img, .bodymenuitem img {
+    width: 200px;
+    position: absolute;
+    clip: rect(70px, 165px, 200px, 35px);
+    transform: translateY(-55px) scale(1.55);
+}
+
+.basiccontrols {
+    display: flex;
+}
+
+#openbodymenubutton, #openheadmenubutton {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#openbodymenubutton {
+    margin-right: 5px;
+}
+
+.btn {
+    padding: 6px;
+    font-family: 'Ubuntu', 'Overpass';
+    font-weight: bold;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: 2px solid #999;
+    background-color: transparent;
+    color: white;
+    transition-duration: .15s;
+}
+
+.btn:hover {
+    background-color: #999 !important;
+}
+
+.btn:active {
+    background-color: #999 !important;
+    border: 2px solid white;
+    transform: scale(0.9);
+}
+
+.btn:disabled {
+    opacity: 0.25;
+}
+
+#openpositionmenubutton, #openoutfitmenubutton {
+    z-index: 1;
+    width: 148px;
+}
+
+::-webkit-scrollbar {
+    background-color: #00000080;
+    border-radius: 10px 0px 0px 10px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+    border-radius: 10px 0px 0px 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 10px 0px 0px 10px;
+}
+
+#background {
+    position: absolute;
+    top: 49px;
+    left: 0;
+    z-index: 0;
+    width: 100vw;
+    object-fit: cover;
+    height: calc(100vh - 100px);
+}
+
+.advcontrols {
+    display: flex;
+    height: 40px;
+}
+
+#openbgmenubutton {
+    position: absolute;
+    bottom: 53px;
+    height: 39px;
+    background-color: #11111180;
+}
+
+.bgmenuitem {
+    width: 355.5px;
+}
+
+.bgmenuitem img {
+    object-fit: cover;
+    height: 200px;
+    position: relative;
+    border-radius: 2.5px 2.5px 0px 0px;
+}
+
+.bgmenuitem p {
+    top: -17px;
+}
+
+#bgcontainer {
+    flex-grow: 1;
+    overflow: scroll;
+    height: calc(100vh - 68px);
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#bgmenu {
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.bgeff {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.bgeff div {
+    flex-grow: 1;
+}
+
+.bgeff button {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: transparent;
+    font-family: 'Ubuntu', 'Overpass';
+    font-size: 1.1em;
+    font-weight: bold;
+    color: black;
+    transition-duration: .15s;
+    width: calc(100% - 5px);
+    margin: 2.5px;
+    margin-bottom: 0;
+    height: 30px;
+}
+
+.bgeff button:hover {
+    border: 2px solid black;
+    background-color: black;
+    color: white;
+}
+
+.bgeff button:active {
+    border: 2px solid #444;
+    background-color: black;
+    color: white;
+    transform: scale(0.9);
+}

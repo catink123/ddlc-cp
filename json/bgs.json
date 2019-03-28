@@ -1,0 +1,11 @@
+{
+    "residential": "residential_day",
+    "class": "class_day",
+    "corridor": "corridor",
+    "club": "club_day",
+    "closet": "closet",
+    "bedroom": "bedroom",
+    "sayori_bedroom": "sayori_bedroom",
+    "house": "house",
+    "kitchen": "kitchen"
+}

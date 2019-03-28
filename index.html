@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>if (window.module) module = window.module;</script>
+
+    <title>DDLC Character Poser</title>
+</head>
+
+<body>
+    <div id="instancesDiv">
+        <div class="instance">
+            <div class="basiccontrols">
+                <select id="characterselect"></select>
+                <button class="btn" id="openbodymenubutton" onclick="togglemenu('body')">Body Menu</button>
+                <button class="btn" id="openheadmenubutton" onclick="togglemenu('head')">Head Menu</button>
+            </div>
+            <div class="menu" id="outfitmenu" style="top: 100vh"></div>
+            <div class="menu" id="headmenu" style="top: 100vh"></div>
+            <div class="menu" id="bodymenu" style="top: 100vh"></div>
+            <div class="menu" id="positionmenu" style="top: 100vh;">
+                <div class="posattr">
+                    <div>
+                        <button onclick="posattr = 't'; updateresult();">Normal</button>
+                        <button onclick="posattr = 'l'; updateresult();">Slide in from left</button>
+                        <button onclick="posattr = 's'; updateresult();">Sink</button>
+                        <button onclick="posattr = 'h'; updateresult();">Hop</button>
+                    </div>
+                    <div>
+                        <button onclick="posattr = 'f'; updateresult();">Focus</button>
+                        <button onclick="posattr = 'i'; updateresult();">Instant appearance</button>
+                        <button onclick="posattr = 'd'; updateresult();">Dip</button>
+                        <button onclick="posattr = 'hp'; updateresult();">Hop and focus</button>
+                    </div>
+                </div>
+                <p>For 1 character:</p>
+                <div class="position">
+                    <button onclick="pos = this.innerHTML; updateresult(); togglemenu('position');">11</button>
+                </div>
+                <p>For 2 characters:</p>
+                <div class="position">
+                    <button onclick="pos = this.innerHTML; updateresult(); togglemenu('position');">21</button>
+                    <button onclick="pos = this.innerHTML; updateresult(); togglemenu('position');">22</button>
+                </div>
+                <p>For 3 characters:</p>
+                <div class="position">
+                    <button onclick="pos = this.innerHTML; updateresult(); togglemenu('position');">31</button>
+                    <button onclick="pos = this.innerHTML; updateresult(); togglemenu('position');">32</button>
+                    <button onclick="pos = this.innerHTML; updateresult(); togglemenu('position');">33</button>
+                </div>
+                <p>For 4 characters:</p>
+                <div class="position">
+                    <button onclick="pos = this.innerHTML; updateresult(); togglemenu('position');">41</button>
+                    <button onclick="pos = this.innerHTML; updateresult(); togglemenu('position');">42</button>
+                    <button onclick="pos = this.innerHTML; updateresult(); togglemenu('position');">43</button>
+                    <button onclick="pos = this.innerHTML; updateresult(); togglemenu('position');">44</button>
+                </div>
+            </div>
+            <div class="menu" id="bgmenu" style="top: 100vh;">
+                <div id="bgcontainer"></div>
+                <div class="bgeff">
+                    <div>
+                        <button onclick="bgeffect = 'dissolve_scene'">Cross-Fade</button>
+                        <button onclick="bgeffect = 'dissolve_scene_full'">Fade Out and Fade In</button>
+                    </div>
+                    <div>
+                        <button onclick="bgeffect = 'wipeleft'">Cross-Fade From Left</button>
+                        <button onclick="bgeffect = 'wipeleft_scene'">Full Fade From Left</button>
+                    </div>
+                </div>
+            </div>
+            <img src="images/default.png" id="background">
+            <div class="previews">
+                <img draggable="false" src="" class="preview" id="head">
+                <img draggable="false" src="" class="preview" id="bodyleft">
+                <img draggable="false" src="" class="preview" id="bodyright">
+            </div>
+            <div class="advcontrols">
+                <button class="btn" id="openpositionmenubutton" onclick="togglemenu('position')">Position
+                    Menu</button>
+                <div class="resultdiv">
+                    <div>
+                        <button class="chrresult" onclick="resultmode = 'chr'; updateresult();">chr</button>
+                        <button class="bgresult" onclick="resultmode = 'bg'; updateresult();">bg</button>
+                    </div>
+                    <input type="text" id="resulttext" value="Choose body and head to see the result">
+                </div>
+                <button class="btn" id="openoutfitmenubutton" onclick="togglemenu('outfit')">Outfit Menu</button>
+            </div>
+            <button class="btn" id="openbgmenubutton" onclick="togglemenu('bg')">Background Menu</button>
+        </div>
+    </div>
+</body>
+
+</html>
