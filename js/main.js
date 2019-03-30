@@ -1,4 +1,4 @@
-let pr = ""
+let pr = "../"
 
 let poses;
 $.getJSON(`${pr}json/poses.json`, (data) => { poses = data });
