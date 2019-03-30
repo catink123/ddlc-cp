@@ -1,4 +1,4 @@
-let pr = "../"
+let pr = ""
 
 let poses;
 $.getJSON(`${pr}json/poses.json`, (data) => { poses = data });
@@ -19,8 +19,8 @@ $(() => {
     characterselect.innerHTML = null;
     $("#characterselect").on('change', () => {
         reset(); updatemenus();
-        openbodymenubutton.innerHTML = "Open Body Select";
-        openheadmenubutton.innerHTML = "Open Head Select";
+        openbodymenubutton.innerHTML = "Body Menu";
+        openheadmenubutton.innerHTML = "Head Menu";
     })
     for (x = 0; x < Object.keys(poses).length; x++) {
         elem = document.createElement("option");
@@ -32,11 +32,13 @@ $(() => {
 
 function updateresult() {
     if (resultmode == "chr") {
-        if (poses[characterselect.value].headmap[openbodymenubutton.innerHTML] == "default") {
-            resulttext.value = ("show " + characterselect.value + " " + openbodymenubutton.innerHTML + outf + openheadmenubutton.innerHTML + " at " + posattr + pos).replace(/undefined|Head Select/, "");
-        } else {
-            resulttext.value = ("show " + characterselect.value + " " + openbodymenubutton.innerHTML + outf + ((poses[characterselect.value].headmap[openbodymenubutton.innerHTML] == null) ? '' : (poses[characterselect.value].headmap[openbodymenubutton.innerHTML] == "default") ? openheadmenubutton.innerHTML : poses[characterselect.value].headmap[openbodymenubutton.innerHTML][openheadmenubutton.innerHTML]) + " at " + posattr + pos).replace(/undefined|Head Select/, "");
-        }
+        if (openbodymenubutton.innerHTML != "Body Menu") {
+            if (poses[characterselect.value].headmap[openbodymenubutton.innerHTML] == "default") {
+                resulttext.value = ("show " + characterselect.value + " " + openbodymenubutton.innerHTML + outf + openheadmenubutton.innerHTML + " at " + posattr + pos).replace(/undefined|Head Menu/, "");
+            } else {
+                resulttext.value = ("show " + characterselect.value + " " + openbodymenubutton.innerHTML + outf + ((poses[characterselect.value].headmap[openbodymenubutton.innerHTML] == null) ? '' : (poses[characterselect.value].headmap[openbodymenubutton.innerHTML] == "default") ? openheadmenubutton.innerHTML : poses[characterselect.value].headmap[openbodymenubutton.innerHTML][openheadmenubutton.innerHTML]) + " at " + posattr + pos).replace(/undefined|Head Menu/, "");
+            }
+        } else { clearresult(); }
     } else {
         resulttext.value = `scene bg ${chosenbg} with ${bgeffect}`
     }
@@ -202,7 +204,7 @@ function choosebody(sender) {
     togglemenu('body');
     if (poses[characterselect.value].headmap[previousbody] != poses[characterselect.value].headmap[openbodymenubutton.innerHTML]) {
         head.src = pr + "images/default.png";
-        openheadmenubutton.innerHTML = "Open Head Select";
+        openheadmenubutton.innerHTML = "Head Menu";
     }
     if (poses[characterselect.value].outfitexclude != null) {
         if (poses[characterselect.value].outfitexclude.includes(openbodymenubutton.innerHTML)) {
