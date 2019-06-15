@@ -27,6 +27,7 @@ $(() => {
         elem.innerHTML = Object.keys(poses)[x];
         characterselect.append(elem);
     }
+    reset();
     updatemenus();
     updateshortcuts();
 })
