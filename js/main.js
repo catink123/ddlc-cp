@@ -1,4 +1,5 @@
 let pr = "../"
+// let pr = ""
 
 let poses;
 $.getJSON(`${pr}json/poses.json`, (data) => { poses = data });
@@ -18,9 +19,7 @@ let resultmode = "chr";
 $(() => {
     characterselect.innerHTML = null;
     $("#characterselect").on('change', () => {
-        reset(); updatemenus();
-        openbodymenubutton.innerHTML = "Body Menu";
-        openheadmenubutton.innerHTML = "Head Menu";
+        reset(); updatemenus(); clearbhbtns();
     })
     for (x = 0; x < Object.keys(poses).length; x++) {
         elem = document.createElement("option");
@@ -28,7 +27,84 @@ $(() => {
         characterselect.append(elem);
     }
     updatemenus();
+    updateshortcuts();
 })
+
+function clearbhbtns() {
+    openbodymenubutton.innerHTML = "Body Menu";
+    openheadmenubutton.innerHTML = "Head Menu";
+}
+
+function updateshortcuts() {
+    $.getJSON(`${pr}json/keybinds.json`, data => {
+        document.addEventListener('keydown', (d) => {
+            if (d.code == `Key${data.body}`) {
+                if (!openbodymenubutton.disabled) {
+                    togglemenu("body")
+                }
+            }
+            if (d.code == `Key${data.head}`) {
+                if (!openheadmenubutton.disabled) {
+                    togglemenu("head")
+                }
+            }
+            if (d.code == `Key${data.outfit}`) {
+                if (!openoutfitmenubutton.disabled) {
+                    togglemenu("outfit")
+                }
+            }
+            if (d.code == `Key${data.bg}`) {
+                if (!openbgmenubutton.disabled) {
+                    togglemenu("bg")
+                }
+            }
+        })
+        /* document.onkeydown = (d) => {
+            if (d.code == `Key${data.body}`) {
+                if (!openbodymenubutton.disabled) {
+                    togglemenu("body")
+                }
+            }
+            if (d.code == `Key${data.head}`) {
+                if (!openheadmenubutton.disabled) {
+                    togglemenu("head")
+                }
+            }
+            if (d.code == `Key${data.outfit}`) {
+                if (!openoutfitmenubutton.disabled) {
+                    togglemenu("outfit")
+                }
+            }
+            if (d.code == `Key${data.bg}`) {
+                if (!openbgmenubutton.disabled) {
+                    togglemenu("bg")
+                }
+            }
+        } */
+    })
+    /* for (var i = 0; i < characterselect.length; i++) {
+        console.log(i)
+        if (i < 10) {
+            s = i;
+            document.addEventListener('keydown', (d) => {
+                console.log(s)
+                if (d.code == `Digit${s.toString()}`) {
+                    characterselect.selectedIndex = s;
+                }
+            })
+        }
+    } */
+    $("#characterselect option").each((index, opt) => {
+        if (index < 10) {
+            document.addEventListener('keydown', (d) => {
+                if (d.code == `Digit${index + 1}`) {
+                    characterselect.selectedIndex = index;
+                    reset(); clearpreview(); clearbhbtns();
+                }
+            })
+        }
+    })
+}
 
 function updateresult() {
     if (resultmode == "chr") {
@@ -241,9 +317,9 @@ function chooseoutfit(outfit) {
 }
 
 function clearpreview() {
-    head.src = pr + "images/default.png";
-    bodyleft.src = pr + "images/default.png";
-    bodyright.src = pr + "images/default.png";
+    head.src = `${pr}images/default.png`;
+    bodyleft.src = `${pr}images/default.png`;
+    bodyright.src = `${pr}images/default.png`;
     outf = '';
 }
 
@@ -255,6 +331,7 @@ function reset() {
     clearpreview();
     clearresult();
     openoutfitmenubutton.disabled = false;
+    openheadmenubutton.disabled = true;
 }
 
 function newInstance() {
