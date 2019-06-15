@@ -17,6 +17,7 @@ let bgeffect = "dissolve_scene";
 let resultmode = "chr";
 
 $(() => {
+    background.src = `${pr}images/default.png`;
     characterselect.innerHTML = null;
     $("#characterselect").on('change', () => {
         reset(); updatemenus(); clearbhbtns();
